@@ -1,0 +1,35 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+option go_package = "github.com/ampchain/go-amp/contractsdk/go/pbrpc";
+
+import "contract.proto";
+package AmpChain.contract.svc;
+
+
+// service provided by chain code, called by AmpChain
+service NativeCode {
+  rpc Call(AmpChain.contract.sdk.NativeCallRequest) returns (AmpChain.contract.sdk.NativeCallResponse);
+  rpc Ping(AmpChain.contract.sdk.PingRequest) returns (AmpChain.contract.sdk.PingResponse);
+}
+
+// AmpChain syscall service
+service Syscall {
+  // KV service
+  rpc PutObject(AmpChain.contract.sdk.PutRequest) returns (AmpChain.contract.sdk.PutResponse);
+  rpc GetObject(AmpChain.contract.sdk.GetRequest) returns (AmpChain.contract.sdk.GetResponse);
+  rpc DeleteObject(AmpChain.contract.sdk.DeleteRequest) returns (AmpChain.contract.sdk.DeleteResponse);
+  rpc NewIterator(AmpChain.contract.sdk.IteratorRequest) returns (AmpChain.contract.sdk.IteratorResponse);
+
+  // Chain service
+  rpc QueryTx(AmpChain.contract.sdk.QueryTxRequest) returns (AmpChain.contract.sdk.QueryTxResponse);
+  rpc QueryBlock(AmpChain.contract.sdk.QueryBlockRequest) returns (AmpChain.contract.sdk.QueryBlockResponse);
+  rpc Transfer(AmpChain.contract.sdk.TransferRequest) returns (AmpChain.contract.sdk.TransferResponse);
+  rpc ContractCall(AmpChain.contract.sdk.ContractCallRequest) returns (AmpChain.contract.sdk.ContractCallResponse);
+
+  // Heartbeat
+  rpc Ping(AmpChain.contract.sdk.PingRequest) returns (AmpChain.contract.sdk.PingResponse);
+
+  rpc GetCallArgs(AmpChain.contract.sdk.GetCallArgsRequest) returns (AmpChain.contract.sdk.CallArgs);
+  rpc SetOutput(AmpChain.contract.sdk.SetOutputRequest) returns (AmpChain.contract.sdk.SetOutputResponse);
+} 
+
